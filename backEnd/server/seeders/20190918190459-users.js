@@ -3,11 +3,9 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
 
       let usersData = [];
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 5; i++) {
           const seedData = {
               name: faker.name.findName(),
-              username: faker.internet.userName(),
-              address: faker.address.streetAddress(),
               email: faker.internet.email(),
               password: faker.internet.password(),
               createdAt: new Date(),
