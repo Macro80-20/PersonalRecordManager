@@ -6,8 +6,8 @@ module.exports = {
       for (let i = 0; i < 5; i++) {
           const seedData = {
               name: faker.name.findName(),
-              email: faker.internet.email(),
               password: faker.internet.password(),
+              email: faker.internet.email(),
               createdAt: new Date(),
               updatedAt: new Date()
           };

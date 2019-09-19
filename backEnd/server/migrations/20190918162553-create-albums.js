@@ -23,6 +23,16 @@ module.exports = {
       year: {
         type: Sequelize.STRING
       },
+      userId: {
+        type: Sequelize.INTEGER,
+        autoIncrement:true,
+        allowNull: false,
+        foreignKey: true,
+      references: {
+        model: 'Users', // name of Target model
+        key: 'id', // target primary key in Target model that we're referencing
+      },
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

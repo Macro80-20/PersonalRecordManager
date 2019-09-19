@@ -5,10 +5,12 @@ module.exports = (sequelize, DataTypes) => {
     artist: DataTypes.STRING,
     numberOfSongs: DataTypes.INTEGER,
     downloads: DataTypes.INTEGER,
-    year: DataTypes.STRING
+    year: DataTypes.STRING,
+    userId: DataTypes.INTEGER,
   }, {});
-  Album.associate = function(models) {
-    // associations can be defined here
-  };
+  Album.associate = (models)=> Album.belongsTo(models.User,{
+      foreignKey: 'userId',
+      as: 'userAlbums',
+  })
   return Album;
 };

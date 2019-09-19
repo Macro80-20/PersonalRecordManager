@@ -1,12 +1,24 @@
-var express = require('express');
-
-const db = require('../models/index')
+const express = require('express');
 const bcrypt = require('bcrypt')  
 
+const db = require('../models/index')
+
+const Album =db["Album"]
 const User = db["User"]
+const router = express.Router();
 
-var router = express.Router();
 
+router.get('/collection',(req,res) =>{
+    User.currentUser(req)
+    .then(currentUser => {
+        if(!currentUser){
+            res.send({error: 'Invalid Token'})
+        } else {        //this is the alias 
+            currentUser.getUserAlbums()
+            .then(usersAlbums=> res.send(usersAlbums))
+        }
+    })
+})
 router.post('/signup',  (req, res)  => {
     // I have a hook in the model that will encrypt passwords
       User.create({
@@ -16,7 +28,7 @@ router.post('/signup',  (req, res)  => {
           createdAt: new Date (),
           updatedAt: new Date()
       }).then(user => res.send(user))
-      .catch(error => console.log(error))
+      .catch(error => res.send(error.errors[0].message))
   
   });
   
@@ -65,18 +77,20 @@ router.post('/signup',  (req, res)  => {
   
   )
   
-  
-//   router.get('/listings',(req,res) =>{
-//       User.currentUser(req)
-//       .then(currentUser => {
-//           if(!currentUser){
-//               res.send({error: 'Invalid Token'})
-//           } else {        //this is the alias 
-//               currentUser.getUserCars()
-//               .then(usersCars=> res.send(usersCars))
-//           }
-//       })
-//   })
+  router.put('/:albumId', (req, res)  => {
+        let privateParams = {}
+         for (const key in req.body) {
+           console.log(key, req.body[key])
+             privateParams[key] = req.body[key]
+           }
+           console.log(privateParams)
+         Album.update(
+             privateParams,
+             {returning:true, where: {id: req.params.albumId}})
+             .then(([rowsUpdated,[updatedAlbum]]) => res.send(updatedAlbum))
+     
+     });
+ 
   
   
   module.exports = router;
