@@ -1,14 +1,17 @@
 import React, { Component,  Fragment } from 'react'
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import { Form, Input, Button } from 'semantic-ui-react'
+
+
+import { signup , login  } from '../services/api'
 
 const lowerCaseRegex = /[a-z]/ 
 const upperCaseRegex = /[A-Z]/
 const numberRegex  = /[0-9]/
 
-export default class RegisterForm extends Component {
+class RegisterForm extends Component {
   state = {
     name: "",
-    role: "",
     email: "",
     password: "",
     touched: {        
@@ -47,24 +50,25 @@ export default class RegisterForm extends Component {
     const isDisabled = Object.keys(errors).some(x => errors[x]);
     return !isDisabled;
   }
-  handleSubmit = evt => {
+
+
+  handleSubmit = (evt) => {
     if (this.canBeSubmitted()) {
       evt.preventDefault();
       return;
-    }
-    const {name ,role,  email, password } = this.state;
-    alert(`Signed up with email: ${email} password: ${password}`);
-    this.setState({ submittedName: name, submittedrole: role, submittedPassword: password, submittedEmail: email, submittedForm:true })
-    // this.props.nextPage(name,role,email,password) 
-   // sort ab
-    evt.preventDefault();
-  };
+    } 
+    signup(this.state).then(data => login(this.state.email , this.state.password))
+    .then( userInfo => {
 
+      // difference beween login and signin. is that login is api request which returns the users email and token.
+      // signin is then invoked to manage state for session. with an email 
+      this.props.signin(userInfo)
+      this.props.history.push('/collection')
+    })
 
-
-
+  }
   render(){
-    const { name, role, email, password } = this.state
+    const { name, email, password } = this.state
     const {handleSubmit, handleChange, validateForm} = this
    
     const errors = validateForm(name, password, email );
@@ -79,24 +83,17 @@ export default class RegisterForm extends Component {
 
 
     return(
-      <div>
+      <>
   <Form onSubmit={handleSubmit}>
       <Form.Input
         name = "name" 
-        error={shouldMarkError("name") && { content: 'Please tell us your first name - this will help us send offers and news to the right person', pointing: 'below' }}
+        error={shouldMarkError("name") && { content: 'Please tell us your name - this will help us send offers and news to the right person', pointing: 'below' }}
         fluid
         label='Name'
         placeholder='Name'
         onChange={handleChange}
         onBlur={this.handleBlur('name')}
         required
-      />
-      <Form.Input
-        name="role"
-        fluid
-        label='Role'
-        placeholder='Role'
-        onChange={handleChange}
       />
       <Form.Input
         name="password"
@@ -123,7 +120,9 @@ export default class RegisterForm extends Component {
       <Button disabled={isDisabled} type='submit'>Submit</Button>
   </Form>
  
-    </div>
+    </>
     )
   }
 }
+
+export default withRouter(RegisterForm)

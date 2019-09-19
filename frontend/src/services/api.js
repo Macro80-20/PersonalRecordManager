@@ -1,11 +1,24 @@
 const baseUrl = 'http://localhost:3002'
 const loginUrl = baseUrl + '/login'
 
-export function signin (email, password) {
-	return fetch(loginUrl, {
-        method: 'POST', 
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+// export function signin (email, password) {
+// 	return fetch(loginUrl, {
+//         method: 'POST', 
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ email, password })
+//     }).then(resp => resp.json())
+// }
+
+
+export function signup (user) {
+    return fetch('http://localhost:3002/signup',{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            name: user.name,
+            email: user.email,
+            password: user.password,
+        })
     }).then(resp => resp.json())
 }
 
@@ -29,4 +42,5 @@ export function login (email, password) {
     }).then(resp => resp.json())
 }
 
-export default { signin, validate, getCollection, login }
+
+export default { signup, validate, getCollection, login }

@@ -1,21 +1,20 @@
 import React from 'react'
+
 import logo from '../logo.svg'
 import { Link } from 'react-router-dom'
-
+import RegisterForm from './RegisterForm'
 const HomePage = props =>
    <header className='App-header'>
     <Link to='/'><img src={logo} className='App-logo' alt='logo' /></Link>
     <h1 className='App-title'>
       {
-        props.username
-          ? `Welcome back, ${props.username}!`
+        props.email
+          ? `Welcome back, ${props.email}!`
           : 'Welcome my Sons.'
       }
       {
-        props.username &&
-          <button onClick={props.signout} variant='contained' color='primary'>
-            SIGN OUT
-          </button>
+        !props.email &&
+          <RegisterForm signin={props.signin}/>
       }
     </h1>
   </header>
