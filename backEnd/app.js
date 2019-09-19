@@ -22,7 +22,8 @@ app.use(routes.auth);
 // db["Album"].findAll().then(albums => console.log(albums))
 // db["User"].findAll({include: [{  model: db.Album, as: "userAlbums"}]}).then(cars => console.log(cars))
 
-  // user[1].getowners()).then(resp => console.log(resp))
+  // using association methods   
+// db.User.findByPk(3).then( x => x.getUserAlbums()).then(resp => console.log(resp))
 
   // db.User.findAll({include: [{ model: db.Albums, as:"userAlbums"}]}).then(cars => console.log(cars))
   // db.User.Albums().then(x => console.log(x))

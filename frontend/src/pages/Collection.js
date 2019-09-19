@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import Item from '../components/Item'
+import { Card } from 'semantic-ui-react'
 
+import Album from '../components/Album'
 import { getCollection } from '../services/api'
 
 export default class Collection extends Component {
   state = {
-    inventory: []
+    albumCollection: []
   }
 
   style = {
@@ -15,37 +16,39 @@ export default class Collection extends Component {
     flexWrap: 'wrap'
   }
 
-  setInventory = () => {
-    getCollection()
+  renderCollection = () => {
+    return getCollection()
       .then(data => {
         if (data.error) {
           alert(data.error)
         } else {
-          this.setState({ inventory: data })
+          this.setState({ albumCollection: data })
         }
       })
   }
 
   componentDidMount () {
-    // if (!this.props.username) {
-    //   this.props.history.push('/signin')
-    // } else {
-    //   this.setInventory()
-    // }
+    if(!this.props.email){
+      this.props.history.push('/signin')
+    }else{
+   this.renderCollection();
+    }
   }
 
   render () {
-    const { inventory } = this.state
-
+    const { albumCollection } = this.state
     return (
       <div style={this.style} className='user-list'>
-        <h3>Here's your inventory:</h3>
-        { inventory.length === 0 && <p>Sorry, you don't have any items.</p>}
+        <h3>Here's your collection:</h3>
+        <Card.Group >
+        { albumCollection.length === 0 && <p>Sorry, you don't have any items.</p>}
         {
-          inventory.map(item =>
-            <Item key={item.id} item={item} />
+          albumCollection.map(album =>
+            <Album key={album.id} album={album} />
           )
         }
+        
+        </Card.Group>
       </div>
     )
   }
