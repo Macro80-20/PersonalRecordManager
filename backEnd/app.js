@@ -15,7 +15,8 @@ const PORT = process.env.PORT || 3002
 
 app.use(bodyParser.json()); 
 app.use('/users', routes.user);
-app.use('/albums', routes.car);
+app.use('/albums', routes.album);
+app.use(routes.auth);
 
 // db["User"].findAll().then(users => console.log(users))
 // db["Album"].findAll().then(albums => console.log(albums))

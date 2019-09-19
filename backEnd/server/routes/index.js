@@ -1,8 +1,9 @@
 const user = require('./user')
-const car = require('./album')
-
+const album = require('./album')
+const auth = require('./auth')
 
 module.exports = {
  user,
- car,
+ album,
+ auth
 }

@@ -1,26 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { Route, Switch, withRouter } from 'react-router-dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import HomePage from './pages/HomePage'
+import Header from './pages/Header'
+import SignInForm from './pages/SignInForm'
+import Collection from './pages/Collection'
+
+import { validate } from './services/api'
+
+import './App.css'
+
+class App extends Component {
+
+  state = {
+    name: '',
+  }
+
+  signin = (user) => {
+    this.setState({ name: user.uname })
+    localStorage.setItem('token', user.token)
+    this.props.history.push('/inventory')
+  }
+
+  signout = () => {
+    this.setState({ name: '' })
+    localStorage.removeItem('token')
+  }
+
+  componentDidMount () {
+    // if (localStorage.token) {
+    //   validate()
+    //     .then(data => {
+    //       if (data.error) {
+    //         alert(data.error)
+    //       } else {
+    //         this.signin(data)
+    //       }
+    //     })
+    // }
+  }
+
+  render() {
+    const { signin, signout } = this
+    const { username } = this.state
+    return (
+      <div className="App">
+        <Header username={username} signout={signout} />
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+          <Route path='/signin' component={props => <SignInForm signin={signin} {...props} />} />
+          <Route path='/inventory' component={props => <Collection username={username} {...props} />} />
+          <Route component={() => <h1>Page not found.</h1>} />
+        </Switch>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default withRouter(App)
