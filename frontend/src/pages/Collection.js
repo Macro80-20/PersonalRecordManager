@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Card } from 'semantic-ui-react'
 
-import Album from '../components/Album'
+import AlbumDetails from '../components/AlbumDetails'
+import Albums from '../components/Albums'
 import { getCollection } from '../services/api'
 
 export default class Collection extends Component {
@@ -17,10 +18,16 @@ export default class Collection extends Component {
     flexWrap: 'wrap'
   }
 
+
+  returnToCollection = () => {
+    this.setState({selectedAlbum: {}});
+  }
+
   onClick = (albumId) => {
     const { albumCollection } = this.state 
     let selectedAlbum = albumCollection.find(album => album["id"] === albumId);
-    this.setState({selectedAlbum: selectedAlbum});
+    this.setState({selectedAlbum: selectedAlbum})
+
   }
 
   renderCollection = () => {
@@ -42,23 +49,24 @@ export default class Collection extends Component {
     }
   }
   render () {
-    const { albumCollection } = this.state
-    const { onClick } = this
+    const { albumCollection, selectedAlbum } = this.state
+    const { onClick, returnToCollection} = this
+
+    const show = Object.entries(selectedAlbum).length >0
+    ? (<AlbumDetails album={selectedAlbum} returnToCollection={returnToCollection}/>)
+    : (<Albums onClick={onClick} albumCollection={albumCollection}/>)
+
     return (
       <div style={this.style} className='user-list'>
         <h3>Here's your collection:</h3>
-        <Card.Group >
-        { albumCollection.length === 0 && <p>Sorry, you don't have any items.</p>}
-        {
-          albumCollection.map(album =>
-            <Album key={album.id} album={album} onClick = {() => onClick(album["id"])}/>
-          )
-        }
-        
-        </Card.Group>
+        {show}
       </div>
     )
   }
 }
 
 
+// {Object.entries(this.state.selectedAlbum).length >0
+//   ? <AlbumDetails album={this.state.selectedAlbum} returnToCollection={returnToCollection}/>
+//   :<Albums onClick={onClick} albumCollection={albumCollection}/>
+//   }

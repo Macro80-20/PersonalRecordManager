@@ -4,17 +4,17 @@ import { Card, Icon, Image } from 'semantic-ui-react'
 
 const src = '/images/wireframe/white-image.png'
 
-const album= (props) => {
-  const { album } = props 
+const Album= (props) => {
+  const { album, onClick } = props 
   return (
-  <Card color='teal'>
+  <Card onClick={() => onClick(album.id)} color='teal'>
     <Image src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg' wrapped ui={false} />
     <Card.Content>
       <Card.Header>{album.name}</Card.Header>
-      <Card.Meta>{album.downloads}</Card.Meta>
+      <Card.Meta>Downloads:{album.downloads}</Card.Meta>
       <Card.Meta>{album.year}</Card.Meta>
       <Card.Description>
-        {album.artist}
+       Artist:  {album.artist}
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
@@ -27,4 +27,4 @@ const album= (props) => {
 )
 }
 
-export default album
+export default Album
