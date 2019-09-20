@@ -59,7 +59,7 @@ class App extends Component {
           ?(<SignInForm signin={signin} {...props} />)
           :<Redirect to="/collection"/>
           )}/>
-          <Route exact path='/market' render={props => <MarketPage emial= {email}/> }/>
+          <Route exact path='/market' render={props => <MarketPage email= {email}/> }/>
           <Route path='/collection'  render={props => <Collection email={email} {...props} />} />
           <Route component={() => <h1>Page not found.</h1>} />
         </Switch>

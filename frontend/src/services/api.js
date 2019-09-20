@@ -46,4 +46,23 @@ export function fetchAlbums () {
     return fetch('http://localhost:3002/albums').then(resp => resp.json())
 }
 
-export default { signup, validate, getCollection, login, fetchAlbums }
+
+export function update (album,borrowee) {
+    return fetch(`http://localhost:3002/albums/${album.userId}`,{
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            name: album.name,
+            artist: album.artist,
+            numberOfSongs: album.numberOfSongs,
+            downloads: album.downloads,
+            year: album.year,
+            onLoan:  borrowee,
+            songs: album.songs,
+            albumCover: album.albumCover
+        })
+    }).then(resp => resp.json())
+}
+
+
+export default { signup, validate, getCollection, login, fetchAlbums ,update }

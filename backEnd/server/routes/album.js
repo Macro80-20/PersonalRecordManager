@@ -49,20 +49,17 @@ router.post("/new", (req, res) => {
   });
 
 
-  // USER CAN UUPDATE THEIR Album SPECS 
-//   router.put('/:userId', (req, res)  => {
-//     let privateParams = {}
-//      for (const key in req.body) {
-//        console.log(key, req.body[key])
-//          privateParams[key] = req.body[key]
-//        }
-//        console.log(privateParams)
-//     //  Album.update(
-//     //      privateParams,
-//     //      {returning:true, where: {id: req.params.userId}})
-//     //      .then(([rowsUpdated,[updatedCar]]) => res.send(updatedCar))
- 
-//  });
+  router.put('/:albumId', (req, res)  => {
+    let privateParams = {}
+    for (const key in req.body) {
+      console.log(key, req.body[key])
+      privateParams[key] = req.body[key]
+    }
+      console.log(privateParams)
+      Album.update(
+        privateParams,{returning:true, where: {id: req.params.albumId}})
+        .then(([rowsUpdated,[updatedAlbum]]) => res.send(updatedAlbum))
+});
 
 
   router.delete("/:id", (req, res) => {
@@ -74,11 +71,8 @@ router.post("/new", (req, res) => {
         return album
         .destroy().then(() => res.send("deleted"));
     }).catch((error)=> res.send(error))
+});
 
-  });
-
-  
- 
 
 
 module.exports = router;

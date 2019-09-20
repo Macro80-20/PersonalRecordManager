@@ -30,7 +30,7 @@ const AlbumDetails= (props) => {
       </ol>
     </Card.Content>
     <Card.Meta>Belongs to </Card.Meta>
-    {loan  && album.loan != false &&<button onClick={() => loan()}> Loan </button>}
+    {loan  && album.loan != false && localStorage.token &&<button onClick={() => loan(album)}> Loan </button>}
     <button onClick={() => returnToCollection()}> Go back </button>
     
   </Card>

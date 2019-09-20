@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import AlbumDetails from '../components/AlbumDetails'
 import Albums from '../components/Albums'
-import { fetchAlbums } from '../services/api'
+import { fetchAlbums, update } from '../services/api'
 
 export default class Market extends Component {
     state = {
@@ -29,8 +29,8 @@ onClick = (albumId) => {
 
 }
 
-borrowAlbum = (albumId) => {
-    
+borrowAlbum = (album) => {
+    update(album,this.props.email)
 }
 
 renderAlbums = () => {
