@@ -9,14 +9,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING, 
       allowNull: { 
         args: false,
-         msg: 'Please enter your username' 
+        msg: 'Please enter your username' 
         }
-     }, 
+    }, 
     password:  { 
       type: DataTypes.STRING, 
       allowNull: { 
         args: false, msg: 'Please enter a password' 
-       }, 
+      }, 
     } ,
     email: { 
       type: DataTypes.STRING, 
@@ -24,20 +24,20 @@ module.exports = (sequelize, DataTypes) => {
       unique: { 
         args: true, 
         msg: 'Email already exists' 
-       }, 
-     validate: { 
-       isEmail: { 
-         args: true, 
-         msg: 'Please enter a valid email address' 
-       }, 
-     }, 
+      }, 
+    validate: { 
+      isEmail: { 
+        args: true, 
+        msg: 'Please enter a valid email address' 
+      }, 
+    }, 
     }, 
   }, {});
   User.associate = models =>  User.hasMany(models.Album,{
     foreignKey: 'userId',
     as: 'userAlbums',
     onDelete: 'CASCADE',
-   })
+  })
 
 
  //Hook Methods 
@@ -47,9 +47,9 @@ User.beforeCreate(async (userInstance,options) => {
   let encryptedPassword = await bcrypt.hash(userInstance.password, saltRounds)
   .then((hash) =>{
     // Store hash in your password DB.
-   userInstance.password = hash;
+  userInstance.password = hash;
   });
- return encryptedPassword
+return encryptedPassword
 });
 
  //Class Methods
@@ -89,5 +89,9 @@ User.prototype.validPassword = function(password) {
   return User;
 };
 
+let encryptedPassword = () => bcrypt.hashSync("123456789", saltRounds)
+
+ let h = encryptedPassword()
+ console.log("TCL: h", h)
 
  

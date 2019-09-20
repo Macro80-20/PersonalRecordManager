@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ARRAY(DataTypes.STRING),
       defaultValue: []
     },
-    albumCover: DataTypes.string,
+    albumCover: DataTypes.STRING,
     
     userId: DataTypes.INTEGER,
   }, {});

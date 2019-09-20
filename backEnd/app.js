@@ -18,22 +18,6 @@ app.use('/users', routes.user);
 app.use('/albums', routes.album);
 app.use(routes.auth);
 
-// db["User"].findAll().then(users => console.log(users))
-// db["Album"].findAll().then(albums => console.log(albums))
-// db["User"].findAll({include: [{  model: db.Album, as: "userAlbums"}]}).then(cars => console.log(cars))
-
-  // using association methods   
-// db.User.findByPk(3).then( x => x.getUserAlbums()).then(resp => console.log(resp))
-
-  // db.User.findAll({include: [{ model: db.Albums, as:"userAlbums"}]}).then(cars => console.log(cars))
-  // db.User.Albums().then(x => console.log(x))
- 
-  // db.Album.findAll({
-  // where: { id: 3 }}).then(user=> user[0].getAlbums()).then(resp => console.log(resp))
-   // 
-  // db.User.findAll({
-  // where: { id: 3 }}).then(user=> user[0].dataValues).then(resp => console.log(resp))
-
 
 
 app.get('/', (req, res) => {
@@ -49,4 +33,24 @@ console.log(`Example app listening on port ${PORT}!`)
 )
 })
 
-// console.log(faker.lorem.words())
+
+// db["User"].findAll().then(users => console.log(users))
+// db["Album"].findAll().then(albums => console.log(albums))
+
+
+// using association methods   
+  // db.User.findByPk(1).then( x => x.getUserAlbums()).then(resp => console.log(resp))
+//using Sequelize commands
+  // db.User.findByPk(1).then( x => console.log(x.dataValues))
+//Structuring response how with add and model
+
+  // db.User.findAll({include: [{ model: db.Albums, as:"userAlbums"}]}).then(albums=> console.log(albums))
+
+
+  // db.Album.findAll({
+  // where: { id: 3 }}).then(user=> user[0].getAlbums()).then(resp => console.log(resp))
+
+//Learning how to user where 
+  // db.User.findAll({
+  // where: { id: 3 }}).then(user=> user[0].dataValues).then(resp => console.log(resp))
+
