@@ -14,7 +14,7 @@ const Album= (props) => {
       <Card.Meta>Downloads:{album.downloads}</Card.Meta>
       <Card.Meta>{album.year}</Card.Meta>
       <Card.Description>
-       Artist:  {album.artist}
+        Artist:{album.artist}
       </Card.Description>
     </Card.Content>
     <Card.Content extra>

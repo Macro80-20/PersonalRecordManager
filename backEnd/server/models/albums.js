@@ -6,6 +6,16 @@ module.exports = (sequelize, DataTypes) => {
     numberOfSongs: DataTypes.INTEGER,
     downloads: DataTypes.INTEGER,
     year: DataTypes.STRING,
+    onLoan:  {
+      type: DataTypes.STRING,
+      defaultValue: "",
+    },
+    songs: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      defaultValue: []
+    },
+    albumCover: DataTypes.string,
+    
     userId: DataTypes.INTEGER,
   }, {});
   Album.associate = (models)=> Album.belongsTo(models.User,{

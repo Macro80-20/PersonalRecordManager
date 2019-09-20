@@ -23,6 +23,17 @@ module.exports = {
       year: {
         type: Sequelize.STRING
       },
+      onLoan:  {
+        type: Sequelize.STRING,
+        defaultValue: "",
+       },
+       songs: {
+        type: Sequelize.ARRAY(Sequelize.STRING),
+        defaultValue: []
+        },
+        albumCover: {
+          type: Sequelize.STRING,
+        },
       userId: {
         type: Sequelize.INTEGER,
         autoIncrement:true,
