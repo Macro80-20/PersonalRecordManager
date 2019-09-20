@@ -18,19 +18,18 @@ class RegisterForm extends Component {
         email: false, 
         password: false
     },
- }
+}
 
- handleChange = (event) => this.setState({ [event.target.name]: event.target.value });
+handleChange = event => this.setState({ [event.target.name]: event.target.value });
 
- validateForm = (name,password,email) => {
+validateForm = (name,password,email) => {
     // true means invalid, so our conditions got reversed
     return {
       name: name.length ===0,
       email: email.length === 0 ,
       password:  this.passwordValidator(password)
-     
     };
-  }
+}
 
   passwordValidator = (password) => {
     const passWordMeetsStandards = password.length === 0 || !lowerCaseRegex.test(password) || !upperCaseRegex.test(password) || !numberRegex.test(password) || password.length < 9

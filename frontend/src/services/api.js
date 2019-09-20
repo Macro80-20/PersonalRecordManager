@@ -1,14 +1,4 @@
 const baseUrl = 'http://localhost:3002'
-const loginUrl = baseUrl + '/login'
-
-// export function signin (email, password) {
-// 	return fetch(loginUrl, {
-//         method: 'POST', 
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({ email, password })
-//     }).then(resp => resp.json())
-// }
-
 
 export function signup (user) {
     return fetch('http://localhost:3002/signup',{

@@ -19,9 +19,8 @@ export default class Collection extends Component {
   }
 
 
-  returnToCollection = () => {
-    this.setState({selectedAlbum: {}});
-  }
+  returnToCollection = () => this.setState({selectedAlbum: {}});
+  
 
   onClick = (albumId) => {
     const { albumCollection } = this.state 
@@ -44,7 +43,7 @@ export default class Collection extends Component {
   componentDidMount () {
     if(!this.props.email){
       this.props.history.push('/signin')
-    }else{
+    } else{
       this.renderCollection();
     }
   }
@@ -52,7 +51,7 @@ export default class Collection extends Component {
     const { albumCollection, selectedAlbum } = this.state
     const { onClick, returnToCollection} = this
 
-    const show = Object.entries(selectedAlbum).length >0
+    const show = Object.entries(selectedAlbum).length > 0
     ? (<AlbumDetails album={selectedAlbum} returnToCollection={returnToCollection}/>)
     : (<Albums onClick={onClick} albumCollection={albumCollection}/>)
 

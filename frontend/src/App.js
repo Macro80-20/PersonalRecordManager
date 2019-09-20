@@ -15,8 +15,6 @@ class App extends Component {
 
   state = {
     email: '',
-    // albumCollection: [],
-    // selectedCar: {},
   }
 
   signin = (user) => {
