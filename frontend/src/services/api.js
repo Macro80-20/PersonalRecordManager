@@ -24,13 +24,13 @@ export function signup (user) {
 
 export function validate () {
     return fetch('http://localhost:3002/validate', {
-	    headers: { 'authorisation': localStorage.token }
+	headers: { 'authorisation': localStorage.token }
     }).then(resp => resp.json())
 }
 
 export function getCollection () {
     return fetch('http://localhost:3002/collection', {
-	    headers: { 'authorisation': localStorage.token }
+	headers: { 'authorisation': localStorage.token }
     }).then(resp => resp.json())
 }
 
@@ -42,5 +42,8 @@ export function login (email, password) {
     }).then(resp => resp.json())
 }
 
+export function fetchAlbums () {
+    return fetch('http://localhost:3002/albums').then(resp => resp.json())
+}
 
-export default { signup, validate, getCollection, login }
+export default { signup, validate, getCollection, login, fetchAlbums }

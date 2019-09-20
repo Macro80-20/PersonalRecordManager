@@ -5,7 +5,7 @@ import { Card, Icon, Image } from 'semantic-ui-react'
 const src = '/images/wireframe/white-image.png'
 
 const AlbumDetails= (props) => {
-  const { album , returnToCollection } = props 
+  const { album , returnToCollection , loan } = props 
   console.log(props)
   return (
   <Card  color='teal'>
@@ -29,7 +29,9 @@ const AlbumDetails= (props) => {
         )}
       </ol>
     </Card.Content>
+    {loan && <button onClick={() => loan()}> Loan </button>}
     <button onClick={() => returnToCollection()}> Go back </button>
+    
   </Card>
 )
 }

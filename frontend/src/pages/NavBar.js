@@ -5,7 +5,6 @@ import SignInForm from './SignInForm';
 class NavBar extends Component {
   state = {
     text: "",
-    // isLoggedIn: false
   }
 
   handleNavClick = (e, { name }) => {
@@ -18,9 +17,8 @@ class NavBar extends Component {
     this.setState({isLoggedIn: !this.state.isLoggedIn});
   }
 
-  handleLogInClick = data => {
-    this.setState({isLoggedIn: !this.state.isLoggedIn})
-}
+  handleLogInClick = data => this.setState({isLoggedIn: !this.state.isLoggedIn})
+
 
 
   
@@ -31,9 +29,9 @@ class NavBar extends Component {
         button = <Button onClick={this.handlelogOutClick}>Sign out</Button>;
       } else {
       button = 
-       <Modal trigger={<Button>Log in</Button>}>
+      <Modal trigger={<Button>Log in</Button>}>
         <Modal.Content>
-          <SignInForm loginClick={this.handleLogInClick} signin={this.props.signin}/>
+        <SignInForm loginClick={this.handleLogInClick} signin={this.props.signin}/>
         </Modal.Content>
       </Modal>
       
@@ -41,18 +39,18 @@ class NavBar extends Component {
     return (
       <Menu>
         <Menu.Item header>PersonAlbumDashboard</Menu.Item>
-        {/* <Menu.Item
-          name='Latest'
-          active={activeItem === 'Latest'}
-          onClick={this.handleItemClick}
-        /> */}
+        <Menu.Item
+        name='Market'
+        active={activeItem === 'Market'}
+        onClick={this.handleNavClick}
+        />
         <Menu.Item 
         name='collection' 
         active={activeItem === 'collection'} 
         onClick={this.handleNavClick} />
         <Menu.Item>
-          {button}
-         </Menu.Item>
+        {button}
+        </Menu.Item>
       </Menu>
     )
   }

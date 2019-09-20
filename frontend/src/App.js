@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 
+import MarketPage from './pages/MarketPage'
 import HomePage from './pages/HomePage'
 import NavBar from './pages/NavBar'
 import SignInForm from './pages/SignInForm'
@@ -58,6 +59,7 @@ class App extends Component {
           ?(<SignInForm signin={signin} {...props} />)
           :<Redirect to="/collection"/>
           )}/>
+          <Route exact path='/market' render={props => <MarketPage emial= {email}/> }/>
           <Route path='/collection'  render={props => <Collection email={email} {...props} />} />
           <Route component={() => <h1>Page not found.</h1>} />
         </Switch>

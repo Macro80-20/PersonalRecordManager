@@ -64,9 +64,3 @@ export default class Collection extends Component {
     )
   }
 }
-
-
-// {Object.entries(this.state.selectedAlbum).length >0
-//   ? <AlbumDetails album={this.state.selectedAlbum} returnToCollection={returnToCollection}/>
-//   :<Albums onClick={onClick} albumCollection={albumCollection}/>
-//   }
