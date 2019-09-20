@@ -29,7 +29,8 @@ const AlbumDetails= (props) => {
         )}
       </ol>
     </Card.Content>
-    {loan && <button onClick={() => loan()}> Loan </button>}
+    <Card.Meta>Belongs to </Card.Meta>
+    {loan  && album.loan != false &&<button onClick={() => loan()}> Loan </button>}
     <button onClick={() => returnToCollection()}> Go back </button>
     
   </Card>
